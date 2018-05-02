@@ -33,10 +33,10 @@ public class GOLCanvas extends Canvas {
 					gc.fillRect(2 + 7 * y, 2 + 7 * x, CELLSIZE, CELLSIZE);
 				} 
 				// Test
-				// else {
-				// gc.setStroke(Color.BLACK);
-				// gc.strokeRect(2+7*y, 2+7*x, CELLSIZE, CELLSIZE);
-				// }
+				 else {
+				 gc.setStroke(Color.BLACK);
+				 gc.strokeRect(2+7*y, 2+7*x, CELLSIZE, CELLSIZE);
+				 }
 			}
 		}
 

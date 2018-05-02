@@ -76,7 +76,11 @@ public class GOLControllerPane extends VBox {
 					alert.setHeaderText("IOException has occurred");
 					alert.showAndWait();
 				} catch (GOLFileException gole) {
-					System.out.println(gole + ". On line No. " + gole.getLineno());
+					Alert alert = new Alert(Alert.AlertType.ERROR);
+					alert.setTitle("File Error");
+					alert.setHeaderText(gole.getMessage());
+					alert.setContentText("Please load a correct file.");
+					alert.showAndWait();
 					
 
 				} finally {
