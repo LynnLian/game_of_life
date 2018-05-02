@@ -1,11 +1,5 @@
 package foundation;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
-import com.apple.laf.AquaButtonExtendedTypes.SegmentedNamedBorder;
 
 public class GOLBoard {
 
@@ -38,7 +32,6 @@ public class GOLBoard {
         // Get the size of the configuration file
 
         int length = filename.length();
-        System.out.println(length);
 
         // Checking for exception
 
