@@ -30,7 +30,7 @@ public class GOLCanvas extends Canvas {
             for (int x = 0; x < GOLBoard.CELLSVERTICAL; x++) {
                 if (board.getCellState(y, x) == CellState.LIVE) {
                     gc.setFill(Color.BLACK);
-                    gc.fillRect(2 + 7 * y, 2 + 7 * x, CELLSIZE, CELLSIZE);
+                    gc.fillRect( GAP + (GAP + CELLSIZE) * y, GAP + (GAP + CELLSIZE)* x, CELLSIZE, CELLSIZE);
                 }
                 // Test
 //				 else {
