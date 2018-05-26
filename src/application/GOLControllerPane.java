@@ -26,12 +26,12 @@ public class GOLControllerPane extends VBox {
         // Create the button.
         Button btnLoad = new Button("Load");
         btnLoad.setMinWidth(BUTTONWIDTH);
-        // set the handler of the ActionEvent to select a GOL file
-        // and then reconstruct the 'currentBoard' with the
-        // filename selected with appropriate handling of
-        // GOLFileException (Alert)
-        // If a new board has been created, it should be shwn using
-        // the show method of the canvas
+
+        Button btnPlay = new Button("Play");
+        btnPlay.setMinWidth(BUTTONWIDTH);
+
+        Button btnPause = new Button("Pause");
+        btnPause.setMinWidth(BUTTONWIDTH);
 
         btnLoad.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent ae) {
@@ -47,7 +47,7 @@ public class GOLControllerPane extends VBox {
                     return;
 
                 // open and read a file
-                String fileText = "";
+                String filename = "";
                 String line = "";
                 BufferedReader in = null;
 
@@ -58,9 +58,9 @@ public class GOLControllerPane extends VBox {
                     // read loop
                     while ((line = in.readLine()) != null) { // while not EOF
 
-                        fileText += line + '\n';
+                        filename += line + '\n';
                     }
-                    GOLBoard currentBoard = new GOLBoard(fileText);
+                    currentBoard = new GOLBoard(filename);
 
                     canvas.clear();
                     canvas.show(currentBoard);
@@ -96,8 +96,20 @@ public class GOLControllerPane extends VBox {
 
         });
 
+        btnPlay.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                GOLBoard newBoard = new GOLBoard(currentBoard);
+                canvas.clear();
+                canvas.show(newBoard);
+
+            }
+        });
+
         // Add them to the box.
         getChildren().addAll(btnLoad);
+        getChildren().addAll(btnPlay);
+        getChildren().addAll(btnPause);
         canvas.show(currentBoard);
     }
 
