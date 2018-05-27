@@ -3,8 +3,8 @@ package foundation;
 
 public class GOLBoard {
 
-    public static int CELLSHORIZONTAL = 5; //columns
-    public static int CELLSVERTICAL = 5; //rows
+    public static int CELLSHORIZONTAL = 100; //columns
+    public static int CELLSVERTICAL = 100; //rows
     public static char REPRESENTATIONLIVECELL = '+';
     public static char REPRESENTATIONDEADCELL = '.';
 
@@ -144,11 +144,6 @@ public class GOLBoard {
 
             }
         }
-
-//        if (liveneighbors > 0) {
-//            System.out.println("Live neighbours is " + liveneighbors);
-//            System.out.println("Location: x: " + x + " y: " + y);
-//        }
 
 
         if (state == CellState.LIVE) {

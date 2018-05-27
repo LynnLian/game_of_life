@@ -1,5 +1,7 @@
 package application;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.scene.control.*;
@@ -13,12 +15,14 @@ import java.io.IOException;
 
 import foundation.GOLBoard;
 import foundation.GOLFileException;
+import javafx.util.Duration;
 
 public class GOLControllerPane extends VBox {
 
     private static final int BUTTONWIDTH = 60;
 
     private GOLBoard currentBoard = new GOLBoard();
+
 
     public GOLControllerPane(GOLCanvas canvas) {
         super(10);
@@ -32,6 +36,15 @@ public class GOLControllerPane extends VBox {
 
         Button btnPause = new Button("Pause");
         btnPause.setMinWidth(BUTTONWIDTH);
+
+        Timeline animation = new Timeline(new KeyFrame(Duration.millis(100), event -> {
+            GOLBoard newBoard = new GOLBoard(currentBoard);
+            canvas.clear();
+            canvas.show(newBoard);
+            currentBoard = newBoard;
+
+        }));
+        animation.setCycleCount(Timeline.INDEFINITE);
 
         btnLoad.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent ae) {
@@ -65,6 +78,10 @@ public class GOLControllerPane extends VBox {
                     canvas.clear();
                     canvas.show(currentBoard);
 
+                    animation.stop();
+                    btnPlay.setDisable(false);
+                    btnPause.setDisable(true);
+
                 } catch (FileNotFoundException fnfe) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Severe Error");
@@ -96,20 +113,35 @@ public class GOLControllerPane extends VBox {
 
         });
 
+
         btnPlay.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                GOLBoard newBoard = new GOLBoard(currentBoard);
-                canvas.clear();
-                canvas.show(newBoard);
+                animation.play();
+
+                btnPlay.setDisable(true);
+                btnPause.setDisable(false);
+
 
             }
         });
+
+        btnPause.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                animation.pause();
+
+                btnPlay.setDisable(false);
+                btnPause.setDisable(true);
+            }
+        });
+
 
         // Add them to the box.
         getChildren().addAll(btnLoad);
         getChildren().addAll(btnPlay);
         getChildren().addAll(btnPause);
+        btnPause.setDisable(true);
         canvas.show(currentBoard);
     }
 
